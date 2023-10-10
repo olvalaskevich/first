@@ -1,25 +1,37 @@
-import React from "react";
+import React, {useState} from "react";
 
 type AccordionPropsType={
     title:string
-    colapse:boolean
+
+}
+
+type AccordionTitlePropsType={
+    openAccordion:()=>void
+    titles:string
 }
 
 
-function Accordion (props:AccordionPropsType) {
+export function Accordion (props:AccordionPropsType) {
+
+    let [open, setOpen]=useState(false)
+
+    const openAccordion=()=>{
+        setOpen(!open)
+    }
+
 
     return (
         <div>
-            <AccordionTitle titles={props.title}/>
-            {!props.colapse && <AccordionBody/> }
+            <AccordionTitle titles={props.title} openAccordion={openAccordion}/>
+            {open && <AccordionBody/> }
         </div>
     )
 
 }
 
-function AccordionTitle(props:any) {
+function AccordionTitle(props:AccordionTitlePropsType) {
         return (
-        <><h3>{props.titles}</h3></>
+        <><h3 onClick={props.openAccordion}>{props.titles}</h3></>
     )
 }
 
@@ -35,5 +47,3 @@ function AccordionBody() {
     )
 }
 
-
-export default  Accordion
