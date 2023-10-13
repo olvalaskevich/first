@@ -1,29 +1,23 @@
-import React, {useState} from "react";
+import React from "react";
 
 type AccordionPropsType={
     title:string
-
+    openAccordion:()=>void
+    open:boolean
 }
 
 type AccordionTitlePropsType={
-    openAccordion:()=>void
     titles:string
+    openAccordion:()=>void
 }
 
 
 export function Accordion (props:AccordionPropsType) {
 
-    let [open, setOpen]=useState(false)
-
-    const openAccordion=()=>{
-        setOpen(!open)
-    }
-
-
     return (
         <div>
-            <AccordionTitle titles={props.title} openAccordion={openAccordion}/>
-            {open && <AccordionBody/> }
+            <AccordionTitle titles={props.title} openAccordion={props.openAccordion}/>
+            {props.open && <AccordionBody/> }
         </div>
     )
 

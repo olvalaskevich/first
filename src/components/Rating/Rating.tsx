@@ -1,75 +1,36 @@
-import React, {useState} from "react";
+import React from "react";
 
 
-// type RatingPropsType={
-//     value:number
-// }
+type RatingPropsType={
+    value:number,
+    selectedStar:(value:number)=>void
+}
 
-
-
-export function Rating() {
-
-    let [selected,setSelected]=useState(0)
-
-    let id=[
-        {num:1, selected:false},
-        {num:2, selected:false},
-        {num:3, selected:false},
-        {num:4, selected:false},
-        {num:5, selected:false}
-]
-
-
-
-    if (selected===1){
-        id[0].selected=true}
-    if (selected===2){
-        id[0].selected=true
-        id[1].selected=true}
-    if (selected===3){
-        id[0].selected=true
-        id[1].selected=true
-        id[2].selected=true}
-    if (selected===4){
-        id[0].selected=true
-        id[1].selected=true
-        id[2].selected=true
-        id[3].selected=true}
-    if (selected===5){
-        id[0].selected=true
-        id[1].selected=true
-        id[2].selected=true
-        id[3].selected=true
-        id[4].selected=true}
-
-    function selectedStar(value:number){
-        setSelected(value)
-    }
-
+export function Rating(props:RatingPropsType) {
 
     return (
             <div>
-
-                {id.map( (id)=>{
-                    return <Star id={id.num} selected={id.selected} selectedStar={selectedStar}/>
-                } )}
+              <Star selected={props.value>0} selectedStar={()=>{props.selectedStar(1)}}/>
+              <Star selected={props.value>1} selectedStar={()=>{props.selectedStar(2)}}/>
+              <Star selected={props.value>2} selectedStar={()=>{props.selectedStar(3)}}/>
+              <Star selected={props.value>3} selectedStar={()=>{props.selectedStar(4)}}/>
+              <Star selected={props.value>4} selectedStar={()=>{props.selectedStar(5)}}/>
             </div>
         )
 
 }
 
 type StarPropsType = {
-    id:number
     selected: boolean
-    selectedStar:(value:number)=>void
+    selectedStar:()=>void
 }
 
 function Star(props: StarPropsType) {
 
-    return (<>
-        {props.selected ? <span onClick={()=>{props.selectedStar(props.id)}}><b>star </b></span> : <span onClick={()=>{props.selectedStar(props.id)}}>star </span>}
-    </>)
+    return <span onClick={props.selectedStar}>{props.selected ? <b>star </b> : 'star' }</span>
 }
+
+
 
 
 

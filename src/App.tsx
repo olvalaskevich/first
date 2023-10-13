@@ -1,11 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import Accordion from "./components/Accordion/Accordion";
+
 import {Rating} from "./components/Rating/Rating";
 import {OnOff} from "./components/OnOff";
+import {Accordion} from "./components/Accordion/Accordion";
 
 function App() {
-    debugger
+    let [open, setOpen]=useState(false)
+
+    let [ratingValue,setRatingValue]=useState(0)
+
+    let [on, setOn]=useState(false)
+
+    const openAccordion=()=>{
+        setOpen(!open)
+    }
+
+    function selectedStar(value:number){
+        setRatingValue(value)
+    }
+
+    function tumbler(){
+        setOn(!on)
+    }
+
+
   return (
     <div>
 
@@ -15,14 +34,14 @@ function App() {
         {/*<AppTitle title={"This is component"}/>*/}
         {/*<AppTitle title={"My friends"}/>*/}
         {/*<Rating value={0}/>*/}
-        <Accordion title={"Menu"} colapse={true}/>
-        <Accordion title={"Main page"} colapse={false}/>
-        <Rating value={1}/>
-        <Rating value={2}/>
-        <Rating value={3}/>
-        <Rating value={4}/>
-        <Rating value={5}/>
-        <OnOff state={true}/>
+        <Accordion title={"Menu"} open={open} openAccordion={openAccordion}/>
+        {/*<Accordion title={"Main page"}/>*/}
+        {/*<Rating value={1}/>*/}
+        {/*<Rating value={2}/>*/}
+        {/*<Rating value={3}/>*/}
+        {/*<Rating value={4}/>*/}
+        <Rating value={ratingValue} selectedStar={selectedStar}/>
+        <OnOff on={on} tumbler={tumbler}/>
     </div>
 
   );
