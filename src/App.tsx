@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 
 import {Rating} from "./components/Rating/Rating";
-import {OnOff} from "./components/OnOff";
+
 import {Accordion} from "./components/Accordion/Accordion";
+import {Button} from "./Button";
 
 function App() {
     let [open, setOpen]=useState(false)
@@ -28,20 +29,11 @@ function App() {
   return (
     <div>
 
-        {/*<input/>*/}
-        {/*<input type={"date"}/>*/}
 
-        {/*<AppTitle title={"This is component"}/>*/}
-        {/*<AppTitle title={"My friends"}/>*/}
-        {/*<Rating value={0}/>*/}
         <Accordion title={"Menu"} open={open} openAccordion={openAccordion}/>
-        {/*<Accordion title={"Main page"}/>*/}
-        {/*<Rating value={1}/>*/}
-        {/*<Rating value={2}/>*/}
-        {/*<Rating value={3}/>*/}
-        {/*<Rating value={4}/>*/}
         <Rating value={ratingValue} selectedStar={selectedStar}/>
-        <OnOff on={on} tumbler={tumbler}/>
+        {/*<OnOff on={on} tumbler={tumbler}/>*/}
+        <Button title={'On'}/>
     </div>
 
   );
